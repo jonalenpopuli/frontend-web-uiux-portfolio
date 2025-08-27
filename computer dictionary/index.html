@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Computer Dictionary</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 20px;
+      background-color: #f8bbd0; /* Light pink background color */
+    }
+
+    h1 {
+      color: #e91e63; /* Dark pink heading color */
+      text-align: center;
+    }
+
+    h2 {
+      color: #c2185b; /* Darker pink letter heading color */
+      margin-bottom: 10px;
+    }
+
+    .letter {
+      margin-bottom: 30px;
+      background-color: #fce4ec; /* Lighter pink letter background color */
+      padding: 15px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .word-list {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .word {
+      cursor: pointer;
+      margin-bottom: 15px;
+      padding: 12px;
+      background-color: #e91e63; /* Dark pink word background color */
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+      color: #fff; /* White text color */
+      text-align: center;
+    }
+
+    .word:hover {
+      background-color: #c2185b; /* Darker pink on hover */
+    }
+
+    .definition {
+      display: none;
+      margin-top: 10px;
+      color: #333;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Computer Dictionary</h1>
+
+  <div id="content"></div>
+
+  <script>
+    // Dictionary data
+    const dictionary = {
+      A: ['API', 'Array', 'ASCII', 'Ajax', 'Algorithm'],
+      E: ['Email', 'Encryption', 'Executable', 'Ethernet', 'Exception'],
+      I: ['Interface', 'IP Address', 'Iteration', 'Input', 'IDE'],
+      O: ['Operating System', 'Output', 'Object', 'Overflow', 'Optimization'],
+      U: ['URL', 'Unicode', 'Upload', 'User Interface', 'USB'],
+    };
+
+    // Function to create the interactive dictionary
+    function createDictionary() {
+      const content = document.getElementById('content');
+
+      for (const letter in dictionary) {
+        const letterDiv = document.createElement('div');
+        letterDiv.classList.add('letter');
+
+        const letterHeading = document.createElement('h2');
+        letterHeading.textContent = letter;
+        letterDiv.appendChild(letterHeading);
+
+        const wordList = document.createElement('ul');
+        wordList.classList.add('word-list');
+
+        for (const word of dictionary[letter]) {
+          const wordItem = document.createElement('li');
+          const wordButton = document.createElement('div');
+          const definition = document.createElement('p');
+
+          wordButton.classList.add('word');
+          wordButton.textContent = word;
+          wordButton.addEventListener('click', () => toggleDefinition(definition));
+
+          definition.classList.add('definition');
+          definition.textContent = getDefinition(word);
+
+          wordItem.appendChild(wordButton);
+          wordItem.appendChild(definition);
+          wordList.appendChild(wordItem);
+        }
+
+        letterDiv.appendChild(wordList);
+        content.appendChild(letterDiv);
+      }
+    }
+
+    // Function to toggle the definition visibility
+    function toggleDefinition(definition) {
+      definition.style.display = (definition.style.display === 'block') ? 'none' : 'block';
+    }
+
+    // Function to get the definition of a word (replace with actual definitions)
+    function getDefinition(word) {
+      const definitions = {
+        'API': 'Application Programming Interface - A set of rules and tools for building software applications.',
+        'Array': 'A data structure that stores a collection of elements, each identified by an index or a key.',
+        'ASCII': 'American Standard Code for Information Interchange - A character encoding standard for electronic communication.',
+        'Ajax': 'Asynchronous JavaScript and XML - A technology for creating dynamic and asynchronous web applications.',
+        'Algorithm': 'A step-by-step procedure or formula for solving a problem or accomplishing a task.',
+        'Email': 'Electronic mail, a method of exchanging digital messages.',
+        'Encryption': 'The process of converting information into a code to prevent unauthorized access.',
+        'Executable': 'A file that contains a program in a form that can be run by a computer.',
+        'Ethernet': 'A widely used system for connecting computers in a local area network (LAN).',
+        'Exception': 'An event that interrupts the normal execution of a program.',
+        'Interface': 'A point of interaction between components, such as hardware devices or software applications.',
+        'IP Address': 'A numerical label assigned to each device participating in a computer network.',
+        'Iteration': 'The repetition of a process in a computer program.',
+        'Input': 'Data that is sent to a computer for processing.',
+        'IDE': 'Integrated Development Environment, a software suite for application development.',
+        'Operating System': 'Software that manages computer hardware and provides services for computer programs.',
+        'Output': 'Data produced by a computer program as a result of processing input.',
+        'Object': 'A self-contained component that contains properties and methods.',
+        'Overflow': 'An error condition that occurs when a program exceeds the bounds of available memory.',
+        'Optimization': 'The process of making a program or system as efficient as possible.',
+        'URL': 'Uniform Resource Locator, a reference to a web resource.',
+        'Unicode': 'A standardized system for encoding characters from all writing systems.',
+        'Upload': 'The process of sending data from a local system to a remote system.',
+        'User Interface': 'The point of interaction between the user and a computer program.',
+        'USB': 'Universal Serial Bus, a standard connection interface for connecting devices to a computer.',
+      };
+
+      return definitions[word] || 'Definition not available.';
+    }
+
+    // Call the function to create the dictionary
+    createDictionary();
+  </script>
+
+</body>
+</html>
